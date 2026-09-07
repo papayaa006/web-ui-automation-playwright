@@ -63,6 +63,7 @@ def test_login_with_invalid_credentials_shows_error(page: Page):
 # ==========================================
 # 案例 3：故意失敗的測試（用來驗證自動截圖機制）
 # ==========================================
+@pytest.mark.xfail(reason="故意測試失敗截圖機制")
 def test_intentional_failure_to_verify_screenshot(page: Page):
     page.goto("https://www.saucedemo.com/")
     page.locator('[data-test="username"]').fill("standard_user")
@@ -72,3 +73,4 @@ def test_intentional_failure_to_verify_screenshot(page: Page):
     # 故意斷言錯誤的文字，觸發失敗截圖
     header = page.locator('[data-test="title"]')
     expect(header).to_have_text("This Header Does Not Exist")
+    

@@ -1,3 +1,4 @@
+[![Playwright UI Tests](https://github.com/papayaa006/web-ui-automation-playwright/actions/workflows/playwright.yml/badge.svg)](https://github.com/papayaa006/web-ui-automation-playwright/actions/workflows/playwright.yml)
 # Web UI End-to-End Automation Test Suite
 
 基於 **Python + Playwright + pytest** 建構的現代化 Web 端到端（E2E）自動化測試專案，以電商網站（SauceDemo）為測試標的，涵蓋核心購物流、異常攔截與測試失敗自動截圖除錯機制。
