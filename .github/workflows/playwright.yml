@@ -1,0 +1,46 @@
+name: Playwright UI Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. 檢出專案程式碼
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. 設定 Python 環境
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    # 3. 安裝 Python 相關依賴
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. 安裝 Playwright 瀏覽器核心與系統依賴庫（關鍵步驟）
+    - name: Install Playwright Browsers with OS Dependencies
+      run: |
+        playwright install --with-deps chromium
+
+    # 5. 執行 UI 自動化測試
+    - name: Run Playwright tests
+      run: |
+        pytest -v
+
+    # 6. 上傳失敗截圖（僅在測試失敗時觸發）
+    - name: Upload screenshots if tests fail
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: failure-screenshots
+        path: screenshots/
